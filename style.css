@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cor-1: #2274A5;
+    --cor-2: #113E59;
+}
+
+body {
+    background-image: linear-gradient(to right, var(--cor-1), var(--cor-2));    
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+    text-align: center;
+    padding-top: 35px;
+    color: white;
+}
+
+.view {
+    font-size: 55px;
+}
+
+.input-field { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  height: 55vh;
+  margin: 0 auto;
+}
+
+input {
+  padding: 15px;
+  font-size: 20px;
+  border-width: 0px;
+  border-radius: 25px;
+  margin-left: 10px;
+}
+
