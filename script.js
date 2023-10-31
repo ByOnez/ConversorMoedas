@@ -59,20 +59,18 @@ fetch(url)
 
 document.addEventListener('DOMContentLoaded', function () {
   const dolarInput = document.getElementById("dolarInput")
-  dolarInput.addEventListener("keyup", function () {
-    let dolarCalculate = dolarInput.value / realUSD
-    console.log(dolarCalculate)
-    let a = document.getElementById("teste")
-    a.innerHTML = dolarCalculate.toFixed(2)
+  dolarInput.addEventListener("input", function () {
+    let dolarValue = parseFloat(dolarInput.value)
+    let realValue = dolarValue * realUSD
+    realInput.value = realValue.toFixed(2)
   })
 })
 
 document.addEventListener('DOMContentLoaded', function () {
   const realInput = document.getElementById("realInput")
-  realInput.addEventListener("keyup", function () {
-    let realCalculate = realInput.value * dolar
-    console.log(realCalculate)
-    let a = document.getElementById("teste")
-    a.innerHTML = realCalculate.toFixed(2)
+  realInput.addEventListener("input", function () {
+    let realValue = parseFloat(realInput.value)
+    let dolarValue = realValue / realUSD
+    dolarInput.value = dolarValue.toFixed(2)
   })
-}) 
+})
