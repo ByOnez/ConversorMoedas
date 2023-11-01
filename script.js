@@ -1,22 +1,20 @@
-const url = "https://v6.exchangerate-api.com/v6/d9489dc4b4199a9fc53ec9a2/latest/BRL"
-const urlUSD = "https://v6.exchangerate-api.com/v6/d9489dc4b4199a9fc53ec9a2/latest/USD"
+const baseCurrency = "USD"
+const targetCurrency = "BRL"
 
 let dolar, real
 
-fetch(urlUSD)
+fetch(`https://v6.exchangerate-api.com/v6/d9489dc4b4199a9fc53ec9a2/latest/${baseCurrency}`)
   .then(response => response.json())
   .then(data => {
     if (data.result === "success") {
       const rates = data.conversion_rates
-      dolarUSD = rates.USD
-      realUSD = rates.BRL
-      console.log(`valor dolar ${dolarUSD}`)
-      console.log(`valor real ${realUSD}`)
+      dolarRates = rates.USD
+      realRates = rates.BRL
     } else {
       console.error("não foi possível obter o valor da moeda")
     }
     let brlValue = document.getElementById("brl-value")
-    brlValue.innerHTML = `${realUSD.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Reais`
+    brlValue.innerHTML = `${realRates.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} Reais`
     let dolarInfo = document.getElementById("dolar-info")
 
     let dateHour = new Date()
@@ -40,28 +38,11 @@ fetch(urlUSD)
     console.error("Erro:", error)
   })
 
-fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    if (data.result === "success") {
-      const rates = data.conversion_rates
-      dolar = rates.USD
-      real = rates.BRL
-      console.log(`valor dolar ${dolar}`)
-      console.log(`valor real ${real}`)
-    } else {
-      console.error("não foi possível obter o valor da moeda")
-    }
-  })
-  .catch(error => {
-    console.error("Erro:", error)
-  })
-
 document.addEventListener('DOMContentLoaded', function () {
   const dolarInput = document.getElementById("dolarInput")
   dolarInput.addEventListener("input", function () {
     let dolarValue = parseFloat(dolarInput.value)
-    let realValue = dolarValue * realUSD
+    let realValue = dolarValue * realRates
     realInput.value = realValue.toFixed(2)
   })
 })
@@ -70,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const realInput = document.getElementById("realInput")
   realInput.addEventListener("input", function () {
     let realValue = parseFloat(realInput.value)
-    let dolarValue = realValue / realUSD
+    let dolarValue = realValue / realRates
     dolarInput.value = dolarValue.toFixed(2)
   })
 })
